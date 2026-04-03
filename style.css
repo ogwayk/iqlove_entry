@@ -1,0 +1,137 @@
+/* 基本設定 */
+body {
+    margin: 0;
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ヘッダー */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* 元の画像に合わせ、余白をさらにタイトに調整 */
+    padding: 8px 15px; 
+    border-bottom: 1px solid #f0f0f0; /* 境界線をさらに薄く */
+    background-color: #fff;
+    /* コンテンツの高さ（画像やボタン）のズレを防ぐ */
+    box-sizing: border-box; 
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* ロゴ画像のサイズと位置調整 */
+.logo-image {
+    height: 38px; /* スマホで自然に見える高さを指定 */
+    width: auto;  /* アスペクト比を維持 */
+    display: block;
+    /* ロゴが左端に寄りすぎないよう微調整 */
+    margin-left: -2px; 
+}
+
+.logout-btn {
+    background: none;
+    border: 1px solid #dcdcdc; /* 枠線を薄く */
+    color: #999;
+    padding: 3px 10px; /* 小さなボタンに調整 */
+    border-radius: 4px;
+    font-size: 11px; /* 小さなフォント */
+    cursor: pointer;
+    white-space: nowrap; /* テキストの改行を防ぐ */
+}
+
+/* メインコンテンツ */
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+.event-title h1 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+}
+
+.event-title p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* チケット情報セクション */
+.ticket-info {
+    text-align: left;
+}
+
+.section-label {
+    font-size: 18px;
+    border-left: 4px solid #30d5c8;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+/* チケットカード */
+.ticket-card {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    padding: 40px 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.date {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.section-num {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.section-num span {
+    font-size: 32px;
+}
+
+.artist-name {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.time-details {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.count {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.count strong {
+    font-size: 24px;
+}
+
+/* ボタン */
+.action-btn {
+    background-color: #888;
+    color: white;
+    border: none;
+    padding: 15px 0;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
