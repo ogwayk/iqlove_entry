@@ -132,9 +132,6 @@ main {
     font-family: "FOT-筑紫ゴシック Pro E", "Noto Sans JP", sans-serif;
 }
 
-#fontplus-trial-banner {
-    display: none !important;
-}
 
 /* ボタン */
 .action-btn {
