@@ -1,7 +1,7 @@
 /* 基本設定 */
 body {
     margin: 0;
-    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
     background-color: #F8F8F8;
     color: #333;
     -webkit-font-smoothing: antialiased;
@@ -98,6 +98,7 @@ main {
 
 .section-num span {
     font-size: 32px;
+    font-family: "FOT-筑紫ゴシック Pro E", "Noto Sans JP", sans-serif;
 }
 
 .artist-name {
@@ -111,6 +112,7 @@ main {
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 25px;
+    font-family: "FOT-筑紫ゴシック Pro E", "Noto Sans JP", sans-serif;
 }
 
 .count {
@@ -120,6 +122,7 @@ main {
 
 .count strong {
     font-size: 24px;
+    font-family: "FOT-筑紫ゴシック Pro E", "Noto Sans JP", sans-serif;
 }
 
 /* ボタン */
