@@ -80,12 +80,13 @@ main {
     background: #fff;
     border: 1px solid #FFFFFF;
     border-radius: 8px;
-    padding: 40px 20px;
+    padding: 30px 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     text-align: center;
 }
 
 .date {
+    margin-top: 0;
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 10px;
@@ -93,6 +94,7 @@ main {
 }
 
 .section-num {
+    margin-top: 0;
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -104,22 +106,25 @@ main {
 }
 
 .artist-name {
+    margin-top: 0;
     font-size: 28px;
     font-weight: bold;
-    margin-bottom: 15px;
+    line-height: 2;
+    margin-bottom: 13px;
 }
 
 .time-details {
+    margin-top: 0;
     color: #ADAFB2;
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.2;
     margin-bottom: 25px;
     font-family: "FOT-筑紫ゴシック Pr5 L", "Noto Sans JP", sans-serif;
 }
 
 .count {
     font-size: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .count strong {
@@ -138,7 +143,7 @@ main {
     border: none;
     padding: 15px 0;
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
     border-radius: 50px;
     font-size: 16px;
     font-weight: bold;
