@@ -132,10 +132,6 @@ main {
     font-family: "FOT-筑紫ゴシック Pro E", "Noto Sans JP", sans-serif;
 }
 
-#fontplus-trial-banner {
-    max-width: 1px;
-}
-
 /* ボタン */
 .action-btn {
     background-color: #7C7C7C;

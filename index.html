@@ -1,66 +1,50 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <title>スリーショット撮影会</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortune Meets Clone</title>
+    <script src="https://webfont.fontplus.jp/accessor/script/fontplus.js?Q3QP~JOAsB4%3D&box=39QuvpukYhw%3D&aa=1&ab=2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body class="page_ticket">
-    <div id="wrapper">
-      <header>
-        <div class="myContainer">
-          <div>
-            <h1><img alt="forTUNE meets" src="image_1.png"></h1>
-            <button class="button ol-gray logout" id="logoutBtn">ログアウト</button>
-          </div>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="image_1.png" alt="fortune meets フォーチュンミーツ" class="logo-image">
         </div>
-      </header>
+        <button class="logout-btn">ログアウト</button>
+    </header>
 
-      <main class="main">
-        <div class="myContainer">
-          <div class="cont-wrapper">
-            <div id="content">
-              <div class="titleWrap">
-                <h2 class="title" id="eventTitle">読み込み中...</h2>
-              </div>
-              <div class="intro">
-                <p class="txt" id="eventSubtitle"></p>
-              </div>
-              <div id="mainContent">
-                <h3 class="border-left-heading">チケット情報</h3>
-                <div class="ticketItemList">
-                  <div class="ticketItem">
-                    <p class="laneEventDate" id="eventDate"></p>
-                    <div class="laneName">
-                      <div class="part" id="eventPart"></div>
-                      <div class="name" id="eventName"></div>
-                    </div>
-                    <div class="laneInfo">
-                      <p id="eventStartTime"></p>
-                      <p id="eventReceptionTime"></p>
-                    </div>
-                    <div class="laneTicket">
-                      保有枚数：<span class="used">0</span>枚使用 / <span class="own">1</span>枚
-                    </div>
-                    <button class="button round gray">イベントに参加する</button>
-                  </div>
+    <main>
+        <section class="event-title">
+            <h1 id="eventTitle">読み込み中...</h1>
+            <p id="eventSubtitle"></p>
+        </section>
+
+        <section class="ticket-info">
+            <h2 class="section-label">チケット情報</h2>
+
+            <div class="ticket-card">
+                <p class="date" id="eventDate"></p>
+                <p class="section-num" id="eventPart"></p>
+                <p class="artist-name" id="eventName"></p>
+
+                <div class="time-details" id="eventTimes">
+                    <p id="eventStartTime"></p>
+                    <p id="eventReceptionTime"></p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
 
-      <footer class="footer">
-        <div>
-          <a href="#">お問合せ</a>
-          <a href="#">プライバシーポリシー</a>
-        </div>
-        <small>&copy;Sony Music Solutions Inc. All rights reserved.</small>
-      </footer>
-    </div>
+                <div class="count">
+                    保有枚数：<strong>0</strong>枚使用 / <strong>1</strong>枚
+                </div>
+
+                <button class="action-btn">イベントに参加する</button>
+            </div>
+        </section>
+    </main>
 
     <script>
       async function loadEvent() {
@@ -75,10 +59,18 @@
           document.getElementById("eventTitle").textContent = event.title;
           document.getElementById("eventSubtitle").textContent = event.subtitle;
           document.getElementById("eventDate").textContent = event.event_date;
-          document.getElementById("eventPart").textContent = event.part;
           document.getElementById("eventName").textContent = event.name;
           document.getElementById("eventStartTime").textContent = "開催：" + event.start_time;
           document.getElementById("eventReceptionTime").textContent = "受付：" + event.reception_start;
+
+          // 「第3部」→ 第<span>3</span>部 に変換
+          const partEl = document.getElementById("eventPart");
+          const partMatch = event.part && event.part.match(/^第(\d+)部$/);
+          if (partMatch) {
+            partEl.innerHTML = `第<span>${partMatch[1]}</span>部`;
+          } else {
+            partEl.textContent = event.part;
+          }
         } catch (e) {
           console.error("イベント情報の取得に失敗しました", e);
         }
@@ -86,5 +78,5 @@
 
       loadEvent();
     </script>
-  </body>
+</body>
 </html>
