@@ -90,7 +90,6 @@ main {
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 10px;
-    font-family: "FOT-筑紫ゴシック Pro E", "Noto Sans JP", sans-serif;
 }
 
 .section-num {
@@ -102,7 +101,6 @@ main {
 
 .section-num span {
     font-size: 32px;
-    font-family: "FOT-筑紫ゴシック Pro E", "Noto Sans JP", sans-serif;
 }
 
 .artist-name {
@@ -119,7 +117,6 @@ main {
     font-size: 14px;
     line-height: 1.2;
     margin-bottom: 25px;
-    font-family: "FOT-筑紫ゴシック Pr5 L", "Noto Sans JP", sans-serif;
 }
 
 .count {
@@ -129,7 +126,6 @@ main {
 
 .count strong {
     font-size: 24px;
-    font-family: "FOT-筑紫ゴシック Pro E", "Noto Sans JP", sans-serif;
 }
 
 /* ボタン */

@@ -58,7 +58,7 @@
 
           document.getElementById("eventTitle").textContent = event.title;
           document.getElementById("eventSubtitle").textContent = event.subtitle;
-          document.getElementById("eventDate").textContent = event.event_date;
+          document.getElementById("eventDate").textContent = event.event_date.slice(0, 10);
           document.getElementById("eventName").textContent = event.name;
           document.getElementById("eventStartTime").textContent = "開催：" + event.start_time;
           document.getElementById("eventReceptionTime").textContent = "受付：" + event.reception_start;
