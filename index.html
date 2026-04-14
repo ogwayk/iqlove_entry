@@ -65,7 +65,10 @@
     <script>
       async function loadEvent() {
         try {
-          const res = await fetch("/api/events");
+          const params = new URLSearchParams(window.location.search);
+          const id = params.get("id");
+          const url = id ? `/api/events/${id}` : "/api/events";
+          const res = await fetch(url);
           if (!res.ok) return;
           const event = await res.json();
 

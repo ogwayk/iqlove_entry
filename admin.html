@@ -17,6 +17,9 @@
       th, td { text-align: left; padding: 8px; border-bottom: 1px solid #eee; }
       th { color: #555; }
       .load-btn { background: #666; padding: 6px 12px; font-size: 12px; }
+      .preview-btn { background: #2563eb; padding: 6px 12px; font-size: 12px; }
+      .delete-btn { background: #dc2626; padding: 6px 10px; font-size: 12px; line-height: 1; }
+      .action-btns { display: flex; gap: 4px; }
     </style>
   </head>
   <body>
@@ -55,7 +58,7 @@
         <tr>
           <th>保存日時</th>
           <th>タイトル</th>
-          <th></th>
+          <th style="width: 160px;"></th>
         </tr>
       </thead>
       <tbody id="historyBody"></tbody>
@@ -83,6 +86,12 @@
         document.getElementById("reception_start").value = event.reception_start || "";
       }
 
+      async function deleteEvent(id) {
+        if (!confirm("この履歴を削除しますか？")) return;
+        await fetch(`/api/events/${id}`, { method: "DELETE" });
+        loadHistory();
+      }
+
       async function loadHistory() {
         try {
           const res = await fetch("/api/events/history");
@@ -92,10 +101,21 @@
           events.forEach((event) => {
             const tr = document.createElement("tr");
             const date = new Date(event.created_at).toLocaleString("ja-JP");
+            const eventJson = JSON.stringify(event).replace(/'/g, "&#39;");
             tr.innerHTML = `
               <td>${date}</td>
               <td>${event.title}</td>
-              <td><button class="load-btn" onclick='fillForm(${JSON.stringify(event)})'>読み込む</button></td>
+              <td>
+                <div class="action-btns">
+                  <button class="load-btn" onclick='fillForm(${eventJson})'>読み込む</button>
+                  <button class="preview-btn" onclick="window.open('/?id=${event.id}', '_blank')">ページ表示</button>
+                  <button class="delete-btn" onclick="deleteEvent(${event.id})" title="削除">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+                    </svg>
+                  </button>
+                </div>
+              </td>
             `;
             tbody.appendChild(tr);
           });
