@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>イベント管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body { font-family: sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; }
+      h1 { font-size: 20px; margin-bottom: 24px; }
+      h2 { font-size: 16px; margin: 32px 0 12px; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+      label { display: block; font-size: 13px; color: #555; margin-bottom: 4px; }
+      input { width: 100%; box-sizing: border-box; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 16px; }
+      button { padding: 10px 24px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+      button:hover { background: #333; }
+      #message { margin-top: 12px; font-size: 14px; color: green; }
+      table { width: 100%; border-collapse: collapse; font-size: 13px; }
+      th, td { text-align: left; padding: 8px; border-bottom: 1px solid #eee; }
+      th { color: #555; }
+      .load-btn { background: #666; padding: 6px 12px; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <h1>イベント管理</h1>
+
+    <h2>現在の内容を編集</h2>
+    <form id="eventForm">
+      <label>タイトル</label>
+      <input type="text" id="title" required>
+
+      <label>サブタイトル</label>
+      <input type="text" id="subtitle">
+
+      <label>日付</label>
+      <input type="date" id="event_date" required>
+
+      <label>パート</label>
+      <input type="text" id="part" placeholder="例：第3部">
+
+      <label>イベント名</label>
+      <input type="text" id="name" placeholder="例：【第1レーン】大谷 映美里・大場 花菜">
+
+      <label>開催時刻</label>
+      <input type="text" id="start_time" placeholder="例：15:00～16:30">
+
+      <label>受付時刻</label>
+      <input type="text" id="reception_start" placeholder="例：14:30～16:00">
+
+      <button type="submit">保存する</button>
+      <div id="message"></div>
+    </form>
+
+    <h2>変更履歴</h2>
+    <table id="historyTable">
+      <thead>
+        <tr>
+          <th>保存日時</th>
+          <th>タイトル</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+
+    <script>
+      async function loadCurrent() {
+        try {
+          const res = await fetch("/api/events");
+          if (!res.ok) return;
+          const event = await res.json();
+          fillForm(event);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      function fillForm(event) {
+        document.getElementById("title").value = event.title || "";
+        document.getElementById("subtitle").value = event.subtitle || "";
+        document.getElementById("event_date").value = event.event_date ? event.event_date.slice(0, 10) : "";
+        document.getElementById("part").value = event.part || "";
+        document.getElementById("name").value = event.name || "";
+        document.getElementById("start_time").value = event.start_time || "";
+        document.getElementById("reception_start").value = event.reception_start || "";
+      }
+
+      async function loadHistory() {
+        try {
+          const res = await fetch("/api/events/history");
+          const events = await res.json();
+          const tbody = document.getElementById("historyBody");
+          tbody.innerHTML = "";
+          events.forEach((event) => {
+            const tr = document.createElement("tr");
+            const date = new Date(event.created_at).toLocaleString("ja-JP");
+            tr.innerHTML = `
+              <td>${date}</td>
+              <td>${event.title}</td>
+              <td><button class="load-btn" onclick='fillForm(${JSON.stringify(event)})'>読み込む</button></td>
+            `;
+            tbody.appendChild(tr);
+          });
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      document.getElementById("eventForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const body = {
+          title: document.getElementById("title").value,
+          subtitle: document.getElementById("subtitle").value,
+          event_date: document.getElementById("event_date").value,
+          part: document.getElementById("part").value,
+          name: document.getElementById("name").value,
+          start_time: document.getElementById("start_time").value,
+          reception_start: document.getElementById("reception_start").value,
+        };
+
+        try {
+          const res = await fetch("/api/events", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+          if (res.ok) {
+            document.getElementById("message").textContent = "保存しました";
+            setTimeout(() => document.getElementById("message").textContent = "", 3000);
+            loadHistory();
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      });
+
+      loadCurrent();
+      loadHistory();
+    </script>
+  </body>
+</html>
